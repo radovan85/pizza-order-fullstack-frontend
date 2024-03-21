@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center" [innerHTML]="'Confirm Phone'"></h1>
+            <div class="card-body">
+                <form id="customerForm">
+                    <div class="form-group">
+                        <label> Phone </label>
+                        <input type="text" id="customerPhone" name="customerPhone" class="form-control"
+                            placeholder="Enter Phone Number" (keypress)="validateNumber($event)"
+                            [value]="getCustomer().customerPhone" />
+                        <span class="text-danger" id="customerPhoneError" style="visibility: hidden;"
+                            [innerHTML]="'Please provide valid phone number!'">
+                        </span>
+                    </div>
+
+
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-success mr-3" (click)="redirectAddressConfirm()"
+                            [innerHTML]="'Back'">
+                        </button>
+                        <button type="button" class="btn btn-danger mr-3" (click)="redirectCancelOrder()"
+                            [innerHTML]="'Cancel'">
+                        </button>
+                        <button type="submit" class="btn btn-success">Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

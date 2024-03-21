@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+<div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
+    <div class="row">
+        <h3> View Pizza Details <button style="margin-left: 390px" (click)="redirectAllPizzas()"
+                class="btn btn-success"><- Back</button> </h3>
+    </div>
+    <br>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th> Name: </th>
+                <td [innerHTML]="getTempPizza().name"></td>
+            </tr>
+            <tr>
+                <th class="list-group-item-secondary" style="background-color: #82FF76"> Description: </th>
+                <td class="list-group-item-secondary" style="background-color: #82FF76"
+                    [innerHTML]="getTempPizza().description"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <img (error)="getTempPizza().imageUrl='https://t4.ftcdn.net/jpg/00/31/38/91/360_F_31389192_BEjagnNVligizqQwN6HvvOqgIJNmhHmj.jpg'"
+                        [src]="getTempPizza().imageUrl" height="250" width="332.5" />
+                </td>
+            </tr>
+            <tr>
+                <th class="list-group-item-primary" style="vertical-align: middle; background-color: #82FF76"> Actions:
+                </th>
+                <td class="list-group-item-primary" style="background-color: #82FF76">
+                    <button (click)="redirectAllSizesByPizza(getTempPizza().pizzaId)" class="btn btn-success"
+                        [innerHTML]="'View Sizes & Prices'"></button>
+                    <ng-template [ngIf]="hasAuthorityAdmin()">
+                        <button (click)="redirectUpdatePizza(getTempPizza().pizzaId)" class="btn btn-success"
+                            [innerHTML]="'Update'">
+                        </button>
+                        <button (click)="deletePizza(getTempPizza().pizzaId)" class="btn btn-danger"
+                            [innerHTML]="'Delete'"></button>
+                    </ng-template>
+
+                    <ng-template [ngIf]="hasAuthorityUser()">
+                        <button (click)="redirectAddPizzaToCart(getTempPizza().pizzaId)" class="btn btn-success">Order
+                            Now</button>
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

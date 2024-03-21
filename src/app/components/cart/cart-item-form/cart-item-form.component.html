@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+<div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+			<h1 class="text-center" [innerHTML]="'Add To Cart'"></h1>
+			<div class="card-body">
+				<form id="itemForm">
+					<div class="form-group">
+						<label> Pizza: </label>
+						<h5 [innerHTML]="getPizza().name"></h5>
+					</div>
+
+					<div class="form-group">
+						<label> Pizza Size </label> <select name="pizzaSizeId" id="pizzaSizeId" class="form-control">
+							<option th:value="''" th:text="${'Please Select'}"></option>
+							<ng-template ngFor let-pizzaSize [ngForOf]="getAllPizzaSizes()">
+								<ng-container *ngIf="getPizza().pizzaId === pizzaSize.pizzaId">
+									<option th:value="${pizzaSize.pizzaSizeId}" [value]="pizzaSize.pizzaSizeId">
+										<ng-container>
+											<span [innerHTML]="pizzaSize.name"></span>
+											<span>&#160;&euro;</span>
+											<span [innerHTML]="pizzaSize.price?.toFixed(2)"></span>
+										</ng-container>
+
+									</option>
+								</ng-container>
+							</ng-template>
+						</select> <span class="text-danger" id="pizzaSizeIdError" style="visibility: hidden;"
+							[innerHTML]="'Please select 1 of the options!'"> </span>
+					</div>
+
+					<div class="form-group">
+						<label [innerHTML]="'Quantity'"></label> <input type="text" id="quantity" name="quantity"
+							class="form-control" placeholder="Enter quantity" (keypress)="validateNumber($event)" />
+						<span class="text-danger" id="quantityError" style="visibility: hidden;"
+							[innerHTML]="'Please provide quantity min 1 max 20!'"> </span>
+					</div>
+
+
+
+					<div class="box-footer">
+						<button type="submit" class="btn btn-success">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

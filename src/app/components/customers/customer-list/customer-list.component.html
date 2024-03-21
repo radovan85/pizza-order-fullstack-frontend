@@ -1,0 +1,91 @@
+<app-navbar></app-navbar>
+<div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
+
+    <div class="row mb-5">
+        <h1>All Registered Users</h1>
+    </div>
+
+    <table class="table table-striped table-bordered" id="listingTable">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center" style="text-align: center; vertical-align: middle;">First Name</th>
+                <th class="text-center" style="text-align: center; vertical-align: middle;">Last Name</th>
+                <th class="text-center" style="text-align: center; vertical-align: middle;">Email Address</th>
+                <th class="text-center" style="text-align: center; vertical-align: middle;">Enabled</th>
+                <th class="text-center" style="text-align: center; vertical-align: middle;">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <ng-template ngFor let-tempCustomer [ngForOf]="getCustomerList()">
+                <tr>
+                    <td class="text-center" style="text-align: center; vertical-align: middle;"
+                        [innerHTML]="getUser(tempCustomer.userId).firstName">
+
+                    </td>
+                    <td class="text-center" style="text-align: center; vertical-align: middle;"
+                        [innerHTML]="getUser(tempCustomer.userId).lastName">
+
+                    </td>
+                    <td class="text-center" style="text-align: center; vertical-align: middle;"
+                        [innerHTML]="getUser(tempCustomer.userId).email">
+
+                    </td>
+
+                    <ng-container *ngIf="getUser(tempCustomer.userId).enabled === 0">
+                        <td class="text-center" style="text-align: center; vertical-align: middle;">
+                            <span class="text-danger">Suspended</span>
+                        </td>
+                    </ng-container>
+
+
+                    <ng-container *ngIf="getUser(tempCustomer.userId).enabled === 1">
+                        <td class="text-center" style="text-align: center; vertical-align: middle;">
+                            Active
+                        </td>
+                    </ng-container>
+
+
+                    <td style="text-align: center; vertical-align: middle">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-success dropdown-toggle"
+                                data-toggle="dropdown">Actions</button>
+                            <div class="dropdown-menu" style="background-color: #82FF76">
+
+                                <a class="dropdown-item" style="color: green; background-color: #82FF76"
+                                    (click)="redirectCustomerDetails(tempCustomer.customerId)"
+                                    onmouseover="this.style='cursor: pointer;background-color: #d9d9d9;'"
+                                    onmouseout="this.style='color: green; background-color: #82FF76;'">Details
+                                </a>
+                                <div class="dropdown-divider"></div>
+
+                                <ng-container *ngIf="getUser(tempCustomer.userId).enabled === 1">
+                                    <a class="dropdown-item" style="color: red; background-color: #EBC8C8"
+                                        onmouseover="this.style='cursor: pointer;background-color: #d9d9d9;'"
+                                        onmouseout="this.style='color: red; background-color: #EBC8C8;'"
+                                        (click)="suspendUser(tempCustomer.userId)">Suspend</a>
+                                </ng-container>
+
+                                <ng-container *ngIf="getUser(tempCustomer.userId).enabled === 0">
+                                    <a class="dropdown-item" style="color: green; background-color: #82FF76;"
+                                        onmouseover="this.style='cursor: pointer;background-color: #d9d9d9;'"
+                                        onmouseout="this.style='color: green; background-color: #82FF76;'"
+                                        (click)="reactivateUser(tempCustomer.userId)">Reactivate</a>
+                                </ng-container>
+
+
+                                <a class="dropdown-item" style="color: #080707; background-color: #ED1427;"
+                                    onmouseover="this.style='cursor: pointer;background-color: #d9d9d9;'"
+                                    onmouseout="this.style='color: #080707; background-color: #ED1427;'"
+                                    (click)="deleteCustomer(tempCustomer.customerId)">Remove
+                                </a>
+
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+	<div class="container mt-5"
+		style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
+
+		<div class="jumbotron">
+			<h1 [innerHTML]="'Pizza Added To Your Cart'"></h1>
+		</div>
+
+		<div class="text-center">
+
+			<button class="btn btn-secondary mr-3"
+				(click)="redirectAllPizzas()" [innerHTML]="'All Pizzas'">
+			</button>
+			<button class="btn btn-success" (click)="redirectCart()"
+				[innerHTML]="'Cart'"></button>
+
+		</div>
+	</div>

@@ -1,13 +1,11 @@
 <app-navbar></app-navbar>
-<div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
-
-    <div class="jumbotron" style="background-color: #c20e14; color: #d9d9d9;">
-        <h1 [innerHTML]="'Invalid Cart'"></h1>
-        <h5 [innerHTML]="'Please add products in your cart'"></h5>
+<div class="container mt-5">
+    <div class="jumbotron bg-danger text-white">
+        <h1>Invalid Cart</h1>
+        <h5>Please add products in your cart</h5>
     </div>
 
-    <div class="mt-5 text-center">
-        <button class="btn btn-success" (click)="redirectAllPizzas()" [innerHTML]="'All Pizzas'">
-        </button>
+    <div class="text-center my-5">
+        <button class="btn btn-outline-success" (click)="redirectAllPizzas()">All Pizzas</button>
     </div>
 </div>

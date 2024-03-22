@@ -1,6 +1,5 @@
 <app-navbar></app-navbar>
 <div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
-
     <h3>
         View User Details <a style="margin-left: 390px" (click)="redirectAllCustomers()" class="btn btn-success"><-
                 Back</a>
@@ -15,8 +14,7 @@
             <tr>
                 <th class="list-group-item-secondary" style="background-color: #82FF76">Last Name:</th>
                 <td class="list-group-item-secondary" style="background-color: #82FF76"
-                    [innerHTML]="getUser(getCustomer().userId).lastName">
-                </td>
+                    [innerHTML]="getUser(getCustomer().userId).lastName"></td>
             </tr>
             <tr>
                 <th>Email Address:</th>
@@ -29,28 +27,19 @@
             </tr>
             <tr>
                 <th [innerHTML]="'Enabled:'"></th>
-                <ng-container *ngIf="getUser(getCustomer().userId).enabled === 0">
-                    <td>
-                        <span class="text-danger" th:text="${'Suspended'}"></span>
-                    </td>
-                </ng-container>
-
-                <ng-container *ngIf="getUser(getCustomer().userId).enabled === 1 ">
-                    <td [innerHTML]="'Active'"></td>
-                </ng-container>
+                <td>
+                    <span *ngIf="getUser(getCustomer().userId).enabled === 0" class="text-danger">Suspended</span>
+                    <span *ngIf="getUser(getCustomer().userId).enabled === 1">Active</span>
+                </td>
             </tr>
             <tr>
                 <th class="list-group-item-primary" style="background-color: #82FF76">Actions:</th>
-
-                <ng-container *ngIf="getUser(getCustomer().userId).enabled === 1">
-                    <td class="list-group-item-primary" style="background-color: #82FF76"><a
-                            (click)="suspendUser(getCustomer().userId)" class="btn btn-danger">Suspend</a></td>
-                </ng-container>
-
-                <ng-container *ngIf="getUser(getCustomer().userId).enabled === 0">
-                    <td class="list-group-item-primary" style="background-color: #82FF76"><a
-                            (click)="reactivateUser(getCustomer().userId)" class="btn btn-secondary">Reactivate</a></td>
-                </ng-container>
+                <td class="list-group-item-primary" style="background-color: #82FF76">
+                    <a *ngIf="getUser(getCustomer().userId).enabled === 1" (click)="suspendUser(getCustomer().userId)"
+                        class="btn btn-danger">Suspend</a>
+                    <a *ngIf="getUser(getCustomer().userId).enabled === 0"
+                        (click)="reactivateUser(getCustomer().userId)" class="btn btn-secondary">Reactivate</a>
+                </td>
             </tr>
         </tbody>
     </table>

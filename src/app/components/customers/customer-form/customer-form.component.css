@@ -1,0 +1,30 @@
+.container {
+    font-family: 'Oswald', sans-serif;
+    color: #12044F;
+}
+
+.card {
+    margin-bottom: 100px;
+    border-radius: 0.5rem;
+}
+
+.card-header {
+    font-size: 1.5rem;
+}
+
+.card-body label {
+    font-weight: bold;
+}
+
+.btn-success {
+    margin-top: 1rem;
+}
+
+a.text-primary:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.card-footer {
+    font-size: 0.9rem;
+}

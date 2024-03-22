@@ -1,44 +1,40 @@
 <app-navbar></app-navbar>
-<div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
+<div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F; margin-bottom: 100px;">
     <div class="row">
-        <h3> View Pizza Details <button style="margin-left: 390px" (click)="redirectAllPizzas()"
-                class="btn btn-success"><- Back</button> </h3>
+        <h3 class="col-9">View Pizza Details</h3>
+        <div class="col-3 text-right">
+            <button (click)="redirectAllPizzas()" class="btn btn-success"><- Back</button>
+        </div>
     </div>
     <br>
-    <table class="table">
+    <table class="table table-bordered">
         <tbody>
             <tr>
-                <th> Name: </th>
+                <th>Name:</th>
                 <td [innerHTML]="getTempPizza().name"></td>
             </tr>
-            <tr>
-                <th class="list-group-item-secondary" style="background-color: #82FF76"> Description: </th>
-                <td class="list-group-item-secondary" style="background-color: #82FF76"
-                    [innerHTML]="getTempPizza().description"></td>
+            <tr class="table-success">
+                <th>Description:</th>
+                <td [innerHTML]="getTempPizza().description"></td>
             </tr>
             <tr>
-                <th></th>
-                <td>
+                <td colspan="2" class="text-center">
                     <img (error)="getTempPizza().imageUrl='https://t4.ftcdn.net/jpg/00/31/38/91/360_F_31389192_BEjagnNVligizqQwN6HvvOqgIJNmhHmj.jpg'"
-                        [src]="getTempPizza().imageUrl" height="250" width="332.5" />
+                        [src]="getTempPizza().imageUrl" class="img-fluid" />
                 </td>
             </tr>
-            <tr>
-                <th class="list-group-item-primary" style="vertical-align: middle; background-color: #82FF76"> Actions:
-                </th>
-                <td class="list-group-item-primary" style="background-color: #82FF76">
-                    <button (click)="redirectAllSizesByPizza(getTempPizza().pizzaId)" class="btn btn-success"
-                        [innerHTML]="'View Sizes & Prices'"></button>
+            <tr class="table-primary">
+                <th>Actions:</th>
+                <td>
+                    <button (click)="redirectAllSizesByPizza(getTempPizza().pizzaId)" class="btn btn-success mr-2">View
+                        Sizes & Prices</button>
                     <ng-template [ngIf]="hasAuthorityAdmin()">
-                        <button (click)="redirectUpdatePizza(getTempPizza().pizzaId)" class="btn btn-success"
-                            [innerHTML]="'Update'">
-                        </button>
-                        <button (click)="deletePizza(getTempPizza().pizzaId)" class="btn btn-danger"
-                            [innerHTML]="'Delete'"></button>
+                        <button (click)="redirectUpdatePizza(getTempPizza().pizzaId)"
+                            class="btn btn-info mr-2">Update</button>
+                        <button (click)="deletePizza(getTempPizza().pizzaId)" class="btn btn-danger">Delete</button>
                     </ng-template>
-
                     <ng-template [ngIf]="hasAuthorityUser()">
-                        <button (click)="redirectAddPizzaToCart(getTempPizza().pizzaId)" class="btn btn-success">Order
+                        <button (click)="redirectAddPizzaToCart(getTempPizza().pizzaId)" class="btn btn-warning">Order
                             Now</button>
                     </ng-template>
                 </td>

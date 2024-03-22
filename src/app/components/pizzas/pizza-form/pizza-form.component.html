@@ -1,45 +1,43 @@
 <app-navbar></app-navbar>
-<div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-            <h1 class="text-center" [innerHTML]="'Create New Pizza'"></h1>
-            <div class="card-body">
-                <form id="pizzaForm" style="max-width: 400px; margin: 0 auto;">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <div class="card">
+                <h1 class="card-header text-center">Create New Pizza</h1>
+                <div class="card-body">
+                    <form id="pizzaForm" style="max-width: 400px; margin: 0 auto;">
+                        <div class="form-group">
+                            <label>Image Url</label>
+                            <input type="text" id="imageUrl" name="imageUrl" class="form-control"
+                                placeholder="Enter Image Url">
+                            <span class="text-danger" id="imageUrlError" style="visibility: hidden;">
+                                Not Empty! Max 255 letters allowed!
+                            </span>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Image Url</label>
-                        <input type="text" id="imageUrl" name="imageUrl" class="form-control"
-                            placeholder="Enter Image Url"  />
-                        <span class="text-danger" id="imageUrlError" style="visibility: hidden;">
-                            Not Empty!Max 255 letters allowed!
-                        </span>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" id="name" name="name" class="form-control"
+                                placeholder="Enter Pizza Name">
+                            <span class="text-danger" id="nameError" style="visibility: hidden;">
+                                Not Empty! Max 40 letters allowed!
+                            </span>
+                        </div>
 
-                    </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" id="description" name="description" class="form-control"
+                                placeholder="Enter description">
+                            <span class="text-danger" id="descriptionError" style="visibility: hidden;">
+                                Not Empty! Max 90 letters allowed!
+                            </span>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Pizza Name"
-                             />
-                        <span class="text-danger" id="nameError" style="visibility: hidden;">
-                            Not Empty!Max 40 letters allowed!
-                        </span>
-
-                    </div>
-
-                    <div class="form-group">
-                        <label>Description</label>
-                        <input type="text" id="description" name="description" class="form-control"
-                            placeholder="Enter description"  />
-                        <span class="text-danger" id="descriptionError" style="visibility: hidden;">
-                            Not Empty!Max 90 letters allowed!
-                        </span>
-                    </div>
-
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-success" [innerHTML]="'Submit'">
-                        </button>
-                    </div>
-                </form>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

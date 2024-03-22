@@ -19,6 +19,10 @@ export class PizzaListComponent implements OnInit {
   private pizzaList: Pizza[] = [];
   private pizzaService = inject(PizzaService);
   private authService = inject(AuthService);
+  private paginatedPizzaList: Pizza[] = [];
+  private pageSize = 5;
+  private currentPage = 1;
+  private totalPages = 1;
 
   ngOnInit(): void {
     Promise.all([
@@ -55,13 +59,22 @@ export class PizzaListComponent implements OnInit {
     return new Promise(() => {
       this.pizzaService.collectAllPizzas()
         .then((response) => {
-          setTimeout(() => this.pizzaList = response.data);
+          //setTimeout(() => this.pizzaList = response.data);
+          setTimeout(() => {
+            this.pizzaList = response.data;
+            this.totalPages = Math.ceil(this.pizzaList.length / this.pageSize);
+            this.setPage(1);
+          })
         })
     })
   }
 
   getPizzaList(): Pizza[] {
     return this.pizzaList;
+  }
+
+  getPaginatedPizzaList(): Pizza[] {
+    return this.paginatedPizzaList;
   }
 
   getHasAuthorityAdmin() {
@@ -72,5 +85,32 @@ export class PizzaListComponent implements OnInit {
     return this.authService.isUser();
   }
 
+  setPage(page: number) {
+    if (page < 1 || page > this.totalPages) {
+      return;
+    }
+    this.currentPage = page;
+    this.paginatedPizzaList = this.pizzaList.slice((page - 1) * this.pageSize, page * this.pageSize);
+  }
+
+  nextPage() {
+    this.setPage(this.currentPage + 1);
+  }
+
+  prevPage() {
+    this.setPage(this.currentPage - 1);
+  }
+
+  getPageSize(): number {
+    return this.pageSize;
+  }
+
+  getCurrentPage(): number {
+    return this.currentPage;
+  }
+
+  getTotalPages(): number {
+    return this.totalPages;
+  }
 
 }

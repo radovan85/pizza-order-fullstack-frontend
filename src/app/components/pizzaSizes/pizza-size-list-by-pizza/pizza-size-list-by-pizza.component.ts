@@ -22,6 +22,11 @@ export class PizzaSizeListByPizzaComponent implements OnInit {
   private pizzaService = inject(PizzaService);
   private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
+  private paginatedPizzaSizeList: PizzaSize[] = [];
+  private pageSize = 5;
+  private currentPage = 1;
+  private totalPages = 1;
+
 
   ngOnInit(): void {
     Promise.all([
@@ -65,7 +70,11 @@ export class PizzaSizeListByPizzaComponent implements OnInit {
     return new Promise(() => {
       this.pizzaService.collectAllSizesByPizza(pizzaId)
         .then((response) => {
-          setTimeout(() => this.pizzaSizeList = response.data);
+          setTimeout(() => {
+            this.pizzaSizeList = response.data
+            this.totalPages = Math.ceil(this.pizzaSizeList.length / this.pageSize);
+            this.setPage(1);
+          })
         })
     })
   }
@@ -95,6 +104,38 @@ export class PizzaSizeListByPizzaComponent implements OnInit {
 
   getPizza(): Pizza {
     return this.pizza;
+  }
+
+  setPage(page: number) {
+    if (page < 1 || page > this.totalPages) {
+      return;
+    }
+    this.currentPage = page;
+    this.paginatedPizzaSizeList = this.pizzaSizeList.slice((page - 1) * this.pageSize, page * this.pageSize);
+  }
+
+  nextPage() {
+    this.setPage(this.currentPage + 1);
+  }
+
+  prevPage() {
+    this.setPage(this.currentPage - 1);
+  }
+
+  getPageSize(): number {
+    return this.pageSize;
+  }
+
+  getCurrentPage(): number {
+    return this.currentPage;
+  }
+
+  getTotalPages(): number {
+    return this.totalPages;
+  }
+
+  getPaginatedPizzaSizeList(): PizzaSize[] {
+    return this.paginatedPizzaSizeList;
   }
 
 

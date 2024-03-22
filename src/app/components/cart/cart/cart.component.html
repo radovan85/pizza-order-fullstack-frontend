@@ -1,34 +1,26 @@
 <app-navbar></app-navbar>
-<div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
-	<div class="jumbotron jumbotron-primary text-center" style="background-color: #c20e14; color: #d9d9d9;">
-		<h2 [innerHTML]="'All Products in your cart'"></h2>
+<div class="container mt-5">
+	<div class="jumbotron bg-danger text-white text-center">
+		<h2>All Products in your cart</h2>
 	</div>
 
-	<div class="mb-5 mt-5">
-		<button class="btn btn-danger mr-3" (click)="eraseAllItems()" [innerHTML]="'Clear Cart'"></button>
-		<button class="btn btn-success" (click)="checkout()" [innerHTML]="'Checkout'"></button>
+	<div class="text-center my-5">
+		<button class="btn btn-outline-danger mr-3" (click)="eraseAllItems()">Clear Cart</button>
+		<button class="btn btn-outline-success" (click)="checkout()">Checkout</button>
 	</div>
 
-	<table class="table table-bordered table-success table-hover table-stripped">
-		<thead class="table-danger">
+	<table class="table table-hover">
+		<thead class="thead-dark">
 			<tr>
-				<th class="text-center" style="text-align: center; vertical-align: middle;" [innerHTML]="'Item Id'">
-				</th>
-				<th class="text-center" style="text-align: center; vertical-align: middle;" [innerHTML]="'Pizza'">
-				</th>
-				<th class="text-center" style="text-align: center; vertical-align: middle;" [innerHTML]="'Size'">
-				</th>
-				<th class="text-center" style="text-align: center; vertical-align: middle;" [innerHTML]="'Unit Price'">
-				</th>
-				<th class="text-center" style="text-align: center; vertical-align: middle;" [innerHTML]="'Quantity'">
-				</th>
-				<th class="text-center" style="text-align: center; vertical-align: middle;" [innerHTML]="'Cart Price'">
-				</th>
-				<th class="text-center" style="text-align: center; vertical-align: middle;" [innerHTML]="'Action'">
-				</th>
+				<th scope="col" class="text-center">Item Id</th>
+				<th scope="col" class="text-center">Pizza</th>
+				<th scope="col" class="text-center">Size</th>
+				<th scope="col" class="text-center">Unit Price</th>
+				<th scope="col" class="text-center">Quantity</th>
+				<th scope="col" class="text-center">Cart Price</th>
+				<th scope="col" class="text-center">Action</th>
 			</tr>
 		</thead>
-
 		<tbody>
 			<ng-template ngFor let-cartItem [ngForOf]="getAllCartItems()">
 				<ng-template ngFor let-tempSize [ngForOf]="getAllPizzaSizes()">
@@ -94,7 +86,8 @@
 			</tr>
 		</tbody>
 	</table>
-	<div class="mt-5 text-center">
-		<button class="btn btn-success" (click)="redirectAllPizzas()" [innerHTML]="'Continue Shopping'"></button>
+
+	<div class="text-center my-5">
+		<button class="btn btn-outline-success" (click)="redirectAllPizzas()">Continue Shopping</button>
 	</div>
 </div>

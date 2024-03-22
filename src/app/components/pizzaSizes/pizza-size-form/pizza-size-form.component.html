@@ -1,61 +1,47 @@
 <app-navbar></app-navbar>
-<div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-            <h1 class="text-center"  [innerHTML]="'Add Size & Price To Pizza'"></h1>
-            <div class="card-body">
-                <form id="pizzaSizeForm">
-                    <div class="form-group">
-                        <label> Pizza </label>
-                        <select name="pizzaId" id="pizzaId" class="form-control" >
-                        	<option disabled selected value="''" [innerHTML]="'Please Select'"></option>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <div class="card">
+                <h1 class="card-header text-center">Add Size & Price To Pizza</h1>
+                <div class="card-body">
+                    <form id="pizzaSizeForm">
+                        <div class="form-group">
+                            <label for="pizzaId">Pizza</label>
+                            <select name="pizzaId" id="pizzaId" class="form-control">
+                                <option disabled selected value="">Please Select</option>
                                 <ng-template ngFor let-tempPizza [ngForOf]="getPizzaList()">
-                                <option [value]="tempPizza.pizzaId" [innerHTML]="tempPizza.name"></option>
-                        </ng-template>
-                        </select>
-                        <span class="text-danger" id="pizzaIdError" 
-                        	style="visibility: hidden;" 
-                        	[innerHTML]="'Please select 1 of the options!'">
-                        </span>
-                    </div>
+                                    <option [value]="tempPizza.pizzaId">{{ tempPizza.name }}</option>
+                                </ng-template>
+                            </select>
+                            <span class="text-danger" id="pizzaIdError" style="visibility: hidden;">
+                                Please select one of the options!
+                            </span>
+                        </div>
 
-                    <div class="form-group">
-                        <label> Size </label>
-                        <input
-                                type = "text"
-                                id="name"
-                                name= "name"
-                                class = "form-control"
-                                placeholder = "Enter Pizza Size"
-                        />
-                        <span class="text-danger" id="nameError" 
-                        	style="visibility: hidden;" 
-                        	[innerHTML]="'Not Empty!Max 40 letters allowed!'">
-                        </span>
-                    </div>
+                        <div class="form-group">
+                            <label for="name">Size</label>
+                            <input type="text" id="name" name="name" class="form-control"
+                                placeholder="Enter Pizza Size">
+                            <span class="text-danger" id="nameError" style="visibility: hidden;">
+                                Not Empty! Max 40 letters allowed!
+                            </span>
+                        </div>
 
-                    <div class="form-group">
-                        <label> Price </label>
-                        <input
-                                type = "text"
-                                id="price"
-                                name= "price"
-                                class = "form-control"
-                                placeholder = "Enter Pizza Price"
-                                (keypress)="validateNumber($event)"
-                        />
-                        <span class="text-danger" id="priceError" 
-                        	style="visibility: hidden;" 
-                        	[innerHTML]="'Please provide valid price!'">
-                        </span>
-                    </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="text" id="price" name="price" class="form-control"
+                                placeholder="Enter Pizza Price" (keypress)="validateNumber($event)">
+                            <span class="text-danger" id="priceError" style="visibility: hidden;">
+                                Please provide a valid price!
+                            </span>
+                        </div>
 
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-success" 
-                        	[innerHTML]="'Submit'"> 
-                        </button>
-                    </div>
-                </form>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -1,9 +1,5 @@
 <app-navbar></app-navbar>
 <div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
-
-
-
-
     <div class="row">
         <h1>All Pizzas</h1>
     </div>
@@ -21,55 +17,44 @@
     <table class="table table-striped table-bordered" id="listingTable">
         <thead class="table-danger">
             <tr>
-                <th class="text-center" style="text-align: center; vertical-align: middle"> Image </th>
-                <th class="text-center" style="text-align: center; vertical-align: middle"> Name </th>
-                <th class="text-center" style="text-align: center; vertical-align: middle"> Description </th>
-                <th class="text-center" style="text-align: center; vertical-align: middle"> Actions </th>
+                <th class="text-center"> Image </th>
+                <th class="text-center"> Name </th>
+                <th class="text-center"> Description </th>
+                <th class="text-center"> Actions </th>
             </tr>
         </thead>
-
         <tbody>
-            <ng-template ngFor let-tempPizza [ngForOf]="getPizzaList()">
+            <ng-template ngFor let-tempPizza [ngForOf]="getPaginatedPizzaList()">
                 <tr>
-                    <td class="text-center" style="text-align: center; vertical-align: middle">
+                    <td class="text-center">
                         <img (error)="tempPizza.imageUrl='https://t4.ftcdn.net/jpg/00/31/38/91/360_F_31389192_BEjagnNVligizqQwN6HvvOqgIJNmhHmj.jpg'"
                             src="{{tempPizza.imageUrl}}" height="100" width="133" />
                     </td>
-                    <td style="text-align: center; vertical-align: middle">{{ tempPizza.name }}</td>
-                    <td style="text-align: center; vertical-align: middle">{{ tempPizza.description }}</td>
-                    <td style="text-align: center; vertical-align: middle">
+                    <td class="text-center">{{ tempPizza.name }}</td>
+                    <td class="text-center">{{ tempPizza.description }}</td>
+                    <td class="text-center">
                         <div class="dropdown">
                             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                                 Actions
                             </button>
-
-                            <div class="dropdown-menu" style="background-color: #82FF76">
+                            <div class="dropdown-menu">
                                 <ng-template [ngIf]="getHasAuthorityAdmin()">
-                                    <a class="dropdown-item" style="color: green; background-color: #82FF76"
-                                        (click)="redirectUpdatePizza(tempPizza.pizzaId)"
-                                        onmouseover="this.style='cursor: pointer;background-color:#C4C4CF;'"
-                                        onmouseout="this.style='color: green; background-color: #82FF76;'">
+                                    <a class="dropdown-item update-pizza"
+                                        (click)="redirectUpdatePizza(tempPizza.pizzaId)">
                                         Update
                                     </a>
                                 </ng-template>
-                                <a class="dropdown-item" style="color: green; background-color: #82FF76"
-                                    (click)="redirectPizzaDetails(tempPizza.pizzaId)"
-                                    onmouseover="this.style='cursor: pointer;background-color:#C4C4CF;'"
-                                    onmouseout="this.style='color: green; background-color: #82FF76;'">
+                                <a class="dropdown-item details-pizza"
+                                    (click)="redirectPizzaDetails(tempPizza.pizzaId)">
                                     Details
                                 </a>
-                                <a class="dropdown-item" style="color: green; background-color: #82FF76"
-                                    (click)="redirectAllSizesByPizza(tempPizza.pizzaId)"
-                                    onmouseover="this.style='cursor: pointer;background-color:#C4C4CF;'"
-                                    onmouseout="this.style='color: green; background-color: #82FF76;'">
+                                <a class="dropdown-item view-sizes"
+                                    (click)="redirectAllSizesByPizza(tempPizza.pizzaId)">
                                     View Sizes & Prices
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <ng-template [ngIf]="getHasAuthorityAdmin()">
-                                    <a class="dropdown-item" style="color: red; background-color: #EBC8C8"
-                                        (click)="deletePizza(tempPizza.pizzaId)"
-                                        onmouseover="this.style='cursor: pointer;background-color:#C4C4CF;'"
-                                        onmouseout="this.style='color: red; background-color: #EBC8C8;'">
+                                    <a class="dropdown-item delete-pizza" (click)="deletePizza(tempPizza.pizzaId)">
                                         Delete
                                     </a>
                                 </ng-template>
@@ -80,4 +65,18 @@
             </ng-template>
         </tbody>
     </table>
+
+    <nav aria-label="Page navigation" *ngIf="getPizzaList().length > 0">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="getCurrentPage() == 1">
+                <a class="page-link" (click)="prevPage()">Previous</a>
+            </li>
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ getCurrentPage() }} / {{ getTotalPages() }}</span>
+            </li>
+            <li class="page-item" [class.disabled]="getCurrentPage() == getTotalPages()">
+                <a class="page-link" (click)="nextPage()">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>

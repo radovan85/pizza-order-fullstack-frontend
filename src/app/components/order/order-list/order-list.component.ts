@@ -24,6 +24,10 @@ export class OrderListComponent implements OnInit {
   private orderService = inject(OrderService);
   private customerService = inject(CustomerService);
   private userService = inject(UserService);
+  private paginatedOrders: Order[] = [];
+  private pageSize = 15;
+  private currentPage = 1;
+  private totalPages = 1;
 
   ngOnInit(): void {
     Promise.all([
@@ -57,6 +61,8 @@ export class OrderListComponent implements OnInit {
         .then((response) => {
           setTimeout(() => {
             this.allOrders = response.data;
+            this.totalPages = Math.ceil(this.allOrders.length / this.pageSize);
+            this.setPage(1);
           })
         })
     })
@@ -95,5 +101,37 @@ export class OrderListComponent implements OnInit {
 
   getAllOrders(): Order[] {
     return this.allOrders;
+  }
+
+  setPage(page: number) {
+    if (page < 1 || page > this.totalPages) {
+      return;
+    }
+    this.currentPage = page;
+    this.paginatedOrders = this.allOrders.slice((page - 1) * this.pageSize, page * this.pageSize);
+  }
+
+  nextPage() {
+    this.setPage(this.currentPage + 1);
+  }
+
+  prevPage() {
+    this.setPage(this.currentPage - 1);
+  }
+
+  getPageSize() {
+    return this.pageSize;
+  }
+
+  getCurrentPage() {
+    return this.currentPage;
+  }
+
+  getTotalPages() {
+    return this.totalPages;
+  }
+
+  getPaginatedOrders(): Order[] {
+    return this.paginatedOrders;
   }
 }

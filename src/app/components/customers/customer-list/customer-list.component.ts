@@ -19,6 +19,10 @@ export class CustomerListComponent implements OnInit {
   private userList: User[] = [];
   private customerService = inject(CustomerService);
   private userService = inject(UserService);
+  private paginatedCustomers: Customer[] = [];
+  private pageSize = 10;
+  private currentPage = 1;
+  private totalPages = 1;
 
   ngOnInit(): void {
     this.loadData();
@@ -85,7 +89,11 @@ export class CustomerListComponent implements OnInit {
     return new Promise(() => {
       this.customerService.collectAllCustomers()
         .then((response) => {
-          setTimeout(() => this.customerList = response.data);
+          setTimeout(() => {
+            this.customerList = response.data;
+            this.totalPages = Math.ceil(this.customerList.length / this.pageSize);
+            this.setPage(1);
+          });
         })
     })
   }
@@ -113,6 +121,38 @@ export class CustomerListComponent implements OnInit {
 
   getCustomerList(): Customer[] {
     return this.customerList;
+  }
+
+  setPage(page: number) {
+    if (page < 1 || page > this.totalPages) {
+      return;
+    }
+    this.currentPage = page;
+    this.paginatedCustomers = this.customerList.slice((page - 1) * this.pageSize, page * this.pageSize);
+  }
+
+  nextPage() {
+    this.setPage(this.currentPage + 1);
+  }
+
+  prevPage() {
+    this.setPage(this.currentPage - 1);
+  }
+
+  getPageSize() {
+    return this.pageSize;
+  }
+
+  getCurrentPage() {
+    return this.currentPage;
+  }
+
+  getTotalPages() {
+    return this.totalPages;
+  }
+
+  getPaginatedCustomers(): Customer[] {
+    return this.paginatedCustomers;
   }
 
 

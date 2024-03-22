@@ -1,92 +1,55 @@
+<!-- Navbar Component -->
 <div>
-    <nav class="navbar bg-success navbar-dark" th:style="${'font-family: Oswald, sans-serif;'}">
-        <a class="navbar-brand" href="#">
-            <img src="https://i.ibb.co/b3sPwT3/Pizza-Appz2.png" alt="Logo" style="width:40px">
+    <!-- Top Navbar with Logo -->
+    <nav class="navbar bg-success navbar-expand-lg navbar-dark" style="font-family: 'Oswald', sans-serif;">
+        <a class="navbar-brand" >
+            <img src="https://i.ibb.co/b3sPwT3/Pizza-Appz2.png" alt="Logo" style="width:40px;">
         </a>
-        <a class="navbar-brand" style="position: absolute; left: 605px">
-            <img src="https://i.ibb.co/VC373m0/Pizza-Appz-Text-Modify.png" alt="Logo" style="width:270px; height: 30px">
+        <a class="navbar-brand mx-auto">
+            <img src="https://i.ibb.co/VC373m0/Pizza-Appz-Text-Modify.png" alt="Logo"
+                style="width:270px; height: 30px;">
         </a>
-
-        <a class="navbar-brand">
-            <img src="https://i.ibb.co/b3sPwT3/Pizza-Appz2.png" alt="Logo" style="width:40px">
-        </a>
-    </nav>
-
-    <nav class="navbar bg-success navbar-dark" style="font-family: Oswald, sans-serif;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <ng-template [ngIf]="isAuthenticated()">
-
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav">
-
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <ng-template [ngIf]="isAuthenticated()">
                     <li class="nav-item">
-                        <a class="nav-link text-white bg-success" onmouseover="this.style='cursor: pointer'">
-                            Welcome
-                            <b>{{ getAuthUser().firstName }}</b>
-                            <b>&#160;</b>
-                            <b>{{ getAuthUser().lastName }}</b>
+                        <a class="nav-link text-white">
+                            Welcome <b>{{ getAuthUser().firstName }}</b>&#160;<b>{{ getAuthUser().lastName }}</b>
                         </a>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link bg-success" onmouseover="this.style='cursor: pointer'"
-                            (click)="redirectHome()">
-                            Dashboard
-                        </a>
+                        <a class="nav-link" (click)="redirectHome()">Dashboard</a>
                     </li>
-
-
                     <ng-template [ngIf]="hasAuthorityAdmin()">
                         <li class="nav-item">
-                            <a class="nav-link bg-success" onmouseover="this.style='cursor: pointer'"
-                                (click)="redirectAllPizzas()">
-                                Pizzas
-                            </a>
+                            <a class="nav-link" (click)="redirectAllPizzas()">Pizzas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-success" onmouseover="this.style='cursor: pointer'"
-                                (click)="redirectAllSizes()">
-                                Pizza Sizes
-                            </a>
+                            <a class="nav-link" (click)="redirectAllSizes()">Pizza Sizes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-success" onmouseover="this.style='cursor: pointer'"
-                                (click)="redirectAllOrders()">
-                                Orders
-                            </a>
+                            <a class="nav-link" (click)="redirectAllOrders()">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-success" onmouseover="this.style='cursor: pointer'"
-                                (click)="redirectAllCustomers()">
-                                Registered Users
-                            </a>
+                            <a class="nav-link" (click)="redirectAllCustomers()">Registered Users</a>
                         </li>
                     </ng-template>
                     <ng-template [ngIf]="hasAuthorityUser()">
                         <li class="nav-item">
-                            <a class="nav-link bg-success" onmouseover="this.style='cursor: pointer'"
-                                (click)="redirectAllPizzas()">
-                                Pizzas
-                            </a>
+                            <a class="nav-link" (click)="redirectAllPizzas()">Pizzas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-success" onmouseover="this.style='cursor: pointer'"
-                                (click)="redirectCart()">
-                                Cart
-                            </a>
+                            <a class="nav-link" (click)="redirectCart()">Cart</a>
                         </li>
                     </ng-template>
-                </ul>
-                <br>
-                <a class="btn text-white bg-danger" onmouseover="this.style='cursor: pointer'"
-                    (click)="redirectLogout()">Logout</a>
-                <br>
-            </div>
-        </ng-template>
-        <br>
+                    <li class="nav-item">
+                        <a class="btn text-white bg-danger" (click)="redirectLogout()">Logout</a>
+                    </li>
+                </ng-template>
+            </ul>
+        </div>
     </nav>
-
-    <br>
 </div>

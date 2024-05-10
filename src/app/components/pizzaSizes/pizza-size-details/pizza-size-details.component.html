@@ -1,0 +1,47 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+    <div class="row">
+        <h3 class="col-9">View Pizza Details</h3>
+        <div class="col-3 text-right">
+            <button (click)="redirectAllSizes()" class="btn btn-secondary"><- Back</button>
+        </div>
+    </div>
+    <br>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name:</th>
+                <td [innerHTML]="getPizza(getTempPizzaSize().pizzaId).name"></td>
+            </tr>
+            <tr class="bg-success text-dark">
+                <th>Size:</th>
+                <td [innerHTML]="getTempPizzaSize().name"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                    <img (error)="getPizza(getTempPizzaSize().pizzaId).imageUrl='https://t4.ftcdn.net/jpg/00/31/38/91/360_F_31389192_BEjagnNVligizqQwN6HvvOqgIJNmhHmj.jpg'"
+                        [src]="getPizza(getTempPizzaSize().pizzaId).imageUrl" class="img-table" />
+                </td>
+            </tr>
+            <tr class="bg-success text-dark">
+                <th>Price:</th>
+                <td>€{{ getTempPizzaSize().price }}</td>
+            </tr>
+            <tr class="bg-primary text-dark">
+                <th>Actions:</th>
+                <td>
+                    <ng-template [ngIf]="hasAuthorityAdmin()">
+                        <button (click)="redirectUpdatePizzaSize(getTempPizzaSize().pizzaSizeId)"
+                            class="btn btn-outline-dark btn-sm mr-2">Update</button>
+                        <button (click)="deletePizzaSize(getTempPizzaSize().pizzaSizeId)"
+                            class="btn btn-danger btn-sm">Delete</button>
+                    </ng-template>
+                    <ng-template [ngIf]="hasAuthorityUser()">
+                        <button (click)="orderPizza(getTempPizzaSize().pizzaId)"
+                            class="btn btn-outline-dark btn-sm">Order</button>
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,41 @@
+.view-sizes,
+.update-pizza,
+.details-pizza {
+    color: green;
+    background-color: #82FF76;
+}
+
+.view-sizes:hover,
+.update-pizza:hover,
+.details-pizza:hover,
+.view-sizes:focus,
+.update-pizza:focus,
+.details-pizza:focus {
+    background-color: #C4C4CF;
+    cursor: pointer;
+}
+
+.delete-pizza {
+    color: red;
+    background-color: #EBC8C8;
+}
+
+.delete-pizza:hover,
+.delete-pizza:focus {
+    background-color: #C4C4CF;
+    cursor: pointer;
+}
+
+.pagination .page-link {
+    color: #007bff;
+}
+
+.pagination .disabled .page-link {
+    color: #6c757d;
+}
+
+table th,
+table td {
+    text-align: center;
+    vertical-align: middle;
+}

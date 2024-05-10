@@ -1,0 +1,16 @@
+    .container {
+        font-family: Oswald, sans-serif;
+        color: #12044F;
+        margin-bottom: 100px;
+    }
+
+    .btn-outline-secondary {
+        color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    .btn-outline-secondary:hover {
+        color: #fff;
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }

@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+<div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F; margin-bottom: 100px;">
+    <div class="row">
+        <h3 class="col-9">View Pizza Details</h3>
+        <div class="col-3 text-right">
+            <button (click)="redirectAllPizzas()" class="btn btn-success"><- Back</button>
+        </div>
+    </div>
+    <br>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Name:</th>
+                <td [innerHTML]="getTempPizza().name"></td>
+            </tr>
+            <tr class="table-success">
+                <th>Description:</th>
+                <td [innerHTML]="getTempPizza().description"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                    <img (error)="getTempPizza().imageUrl='https://t4.ftcdn.net/jpg/00/31/38/91/360_F_31389192_BEjagnNVligizqQwN6HvvOqgIJNmhHmj.jpg'"
+                        [src]="getTempPizza().imageUrl" class="img-fluid" />
+                </td>
+            </tr>
+            <tr class="table-primary">
+                <th>Actions:</th>
+                <td>
+                    <button (click)="redirectAllSizesByPizza(getTempPizza().pizzaId)" class="btn btn-success mr-2">View
+                        Sizes & Prices</button>
+                    <ng-template [ngIf]="hasAuthorityAdmin()">
+                        <button (click)="redirectUpdatePizza(getTempPizza().pizzaId)"
+                            class="btn btn-info mr-2">Update</button>
+                        <button (click)="deletePizza(getTempPizza().pizzaId)" class="btn btn-danger">Delete</button>
+                    </ng-template>
+                    <ng-template [ngIf]="hasAuthorityUser()">
+                        <button (click)="redirectAddPizzaToCart(getTempPizza().pizzaId)" class="btn btn-warning">Order
+                            Now</button>
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

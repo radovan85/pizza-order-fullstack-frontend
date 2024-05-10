@@ -1,0 +1,46 @@
+body {
+    font-family: 'Oswald', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    color: #12044F;
+    margin-bottom: 100px;
+}
+
+.table th {
+    background-color: #82FF76;
+}
+
+.table td {
+    background-color: #f5f5f5;
+}
+
+.text-danger {
+    color: #dc3545;
+
+}
+
+.btn-success {
+    margin-left: 390px;
+
+}
+
+.btn-danger {
+    background-color: #dc3545;
+
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+
+}
+
+.btn-danger:hover {
+    background-color: #bd2130;
+
+}
+
+.btn-secondary:hover {
+    background-color: #575d62;
+}

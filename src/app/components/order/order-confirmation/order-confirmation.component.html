@@ -1,0 +1,69 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+    <div class="row mt-5">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Receipt</h2>
+                </div>
+                <div class="card-body">
+                    <address>
+                        <strong>Address:</strong><br>
+                        <span>{{ getShippingAddress().address }}</span><br>
+                        <span>{{ getShippingAddress().city }}</span><br>
+                        <span>{{ getShippingAddress().postcode }}</span>
+                    </address>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Pizza</th>
+                                <th class="text-center">Size</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-template ngFor let-cartItem [ngForOf]="getAllCartItems()">
+                                <ng-template ngFor let-tempSize [ngForOf]="getAllPizzaSizes()">
+                                    <ng-template ngFor let-tempPizza [ngForOf]="getAllPizzas()">
+                                        <ng-container *ngIf="cartItem.pizzaSizeId === tempSize.pizzaSizeId">
+                                            <ng-container *ngIf="tempSize.pizzaId === tempPizza.pizzaId">
+                                                <tr>
+                                                    <td class="text-center"><em [innerHTML]="tempPizza.name"></em>
+                                                    </td>
+                                                    <td class="text-center"><em [innerHTML]="tempSize.name"></em>
+                                                    </td>
+                                                    <td class="text-center" [innerHTML]="cartItem.quantity">
+                                                    </td>
+
+                                                    <td class="text-center"
+                                                        [innerHTML]="'€' + tempSize.price?.toFixed(2)">
+                                                    </td>
+
+                                                    <td class="text-center"
+                                                        [innerHTML]="'€' + cartItem.price?.toFixed(2)">
+                                                    </td>
+                                                </tr>
+                                            </ng-container>
+                                        </ng-container>
+                                    </ng-template>
+                                </ng-template>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="text-center my-5">
+        Grand Total Price: <span>€ {{ calculateGrandTotal(getAllCartItems()).toFixed(2) }}</span>
+    </h3>
+
+    <div class="text-center mb-5">
+        <button type="button" class="btn btn-outline-success mr-3" (click)="redirectPhoneConfirmation()">Back</button>
+        <button type="button" class="btn btn-outline-danger mr-3" (click)="redirectCancelOrder()">Cancel</button>
+        <button type="button" class="btn btn-outline-primary" (click)="executeOrder()">Continue</button>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+    <div class="row mb-4">
+        <h1 class="text-primary">Orders</h1>
+    </div>
+
+    <div class="row">
+        <!-- Content will go here -->
+    </div>
+
+    <table class="table table-hover" id="listingTable">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="text-center">First Name</th>
+                <th scope="col" class="text-center">Last Name</th>
+                <th scope="col" class="text-center">Price</th>
+                <th scope="col" class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-order [ngForOf]="getPaginatedOrders()">
+                <ng-template ngFor let-tempCustomer [ngForOf]="getAllCustomers()">
+                    <ng-template ngFor let-tempUser [ngForOf]="getAllUsers()">
+                        <ng-container *ngIf="order.cartId === tempCustomer.cartId">
+                            <ng-container *ngIf="tempCustomer.userId === tempUser.id">
+                                <tr>
+                                    <td class="text-center align-middle" [innerHTML]="tempUser.firstName"></td>
+                                    <td class="text-center align-middle" [innerHTML]="tempUser.lastName"></td>
+                                    <td class="text-center align-middle">
+                                        <span>€</span>
+                                        <span [innerHTML]="order.orderPrice?.toFixed(2)"></span>
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <div class="dropdown">
+                                            <button type="button" class="btn btn-success dropdown-toggle"
+                                                data-toggle="dropdown">Actions</button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item text-success"
+                                                    (click)="redirectOrderDetails(order.orderId)">Details</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger"
+                                                    (click)="deleteOrder(order.orderId)">Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </ng-container>
+                    </ng-template>
+                </ng-template>
+            </ng-template>
+        </tbody>
+    </table>
+
+    <div class="pagination" *ngIf="getAllOrders().length > 0">
+        <button (click)="prevPage()" [disabled]="getCurrentPage() == 1">Previous</button>
+        <span>Page {{ getCurrentPage() }} / {{ getTotalPages() }}</span>
+        <button (click)="nextPage()" [disabled]="getCurrentPage() == getTotalPages()">Next</button>
+    </div>
+</div>

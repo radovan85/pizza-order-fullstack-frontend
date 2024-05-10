@@ -1,0 +1,80 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+    <div class="row">
+        <h1 class="col-9">All Pizza Sizes</h1>
+        <div class="col-3 text-right">
+            <button (click)="redirectAllPizzas()" class="btn btn-success"><- Back to Pizzas</button>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-lg-3">
+            <button (click)="redirectAddPizzaSize()" class="btn btn-success btn-sm">Add Pizza Size</button>
+        </div>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">Image</th>
+                <th class="text-center">Pizza</th>
+                <th class="text-center">Size</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-tempPizzaSize [ngForOf]="getPaginatedPizzaSizeList()">
+                <tr>
+                    <td class="text-center">
+                        <img (error)="getPizza().imageUrl='https://t4.ftcdn.net/jpg/00/31/38/91/360_F_31389192_BEjagnNVligizqQwN6HvvOqgIJNmhHmj.jpg'"
+                            [src]="getPizza().imageUrl" class="img-fluid" />
+                    </td>
+                    <td class="text-center" [innerHTML]="getPizza().name"></td>
+                    <td class="text-center">{{ tempPizzaSize.name }}</td>
+                    <td class="text-center">€{{ tempPizzaSize.price?.toFixed(2) }}</td>
+                    <td class="text-center">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                Actions
+                            </button>
+                            <div class="dropdown-menu">
+                                <ng-template [ngIf]="hasAuthorityAdmin()">
+                                    <button class="dropdown-item"
+                                        (click)="redirectUpdatePizzaSize(tempPizzaSize.pizzaSizeId)">
+                                        Update
+                                    </button>
+                                </ng-template>
+                                <button class="dropdown-item"
+                                    (click)="redirectPizzaSizeDetails(tempPizzaSize.pizzaSizeId)">
+                                    Details
+                                </button>
+                                <div class="dropdown-divider"></div>
+                                <ng-template [ngIf]="hasAuthorityAdmin()">
+                                    <button class="dropdown-item text-danger"
+                                        (click)="deletePizzaSize(tempPizzaSize.pizzaSizeId)">
+                                        Delete
+                                    </button>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation" *ngIf="getPizzaSizeList().length > 0">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="getCurrentPage() == 1">
+                <button class="page-link" (click)="prevPage()">Previous</button>
+            </li>
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ getCurrentPage() }} / {{ getTotalPages() }}</span>
+            </li>
+            <li class="page-item" [class.disabled]="getCurrentPage() == getTotalPages()">
+                <button class="page-link" (click)="nextPage()">Next</button>
+            </li>
+        </ul>
+    </nav>
+</div>

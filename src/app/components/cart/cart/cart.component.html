@@ -1,0 +1,93 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+	<div class="jumbotron bg-danger text-white text-center">
+		<h2>All Products in your cart</h2>
+	</div>
+
+	<div class="text-center my-5">
+		<button class="btn btn-outline-danger mr-3" (click)="eraseAllItems()">Clear Cart</button>
+		<button class="btn btn-outline-success" (click)="checkout()">Checkout</button>
+	</div>
+
+	<table class="table table-hover">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col" class="text-center">Item Id</th>
+				<th scope="col" class="text-center">Pizza</th>
+				<th scope="col" class="text-center">Size</th>
+				<th scope="col" class="text-center">Unit Price</th>
+				<th scope="col" class="text-center">Quantity</th>
+				<th scope="col" class="text-center">Cart Price</th>
+				<th scope="col" class="text-center">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<ng-template ngFor let-cartItem [ngForOf]="getAllCartItems()">
+				<ng-template ngFor let-tempSize [ngForOf]="getAllPizzaSizes()">
+					<ng-template ngFor let-tempPizza [ngForOf]="getAllPizzas()">
+						<ng-container *ngIf="cartItem.pizzaSizeId === tempSize.pizzaSizeId">
+							<ng-container *ngIf="tempPizza.pizzaId === tempSize.pizzaId">
+								<tr>
+									<td class="text-center" style="text-align: center; vertical-align: middle;"
+										[innerHTML]="cartItem.cartItemId">
+									</td>
+									<td class="text-center" style="text-align: center; vertical-align: middle;"
+										[innerHTML]="tempPizza.name">
+									</td>
+									<td class="text-center" style="text-align: center; vertical-align: middle;"
+										[innerHTML]="tempSize.name">
+									</td>
+									<td class="text-center" style="text-align: center; vertical-align: middle;">
+										<span>&euro;</span>
+										<span [innerHTML]="tempSize.price?.toFixed(2)"></span>
+									</td>
+									<td class="text-center" style="text-align: center; vertical-align: middle;"
+										[innerHTML]="cartItem.quantity">
+									</td>
+									<td class="text-center" style="text-align: center; vertical-align: middle;">
+										<span>&euro;</span>
+										<span [innerHTML]="cartItem.price?.toFixed(2)"></span>
+									</td>
+									<td class="text-center" style="text-align: center; vertical-align: middle;">
+										<button class="btn btn-danger" [innerHTML]="'Remove'"
+											(click)="eraseItem(cartItem.cartItemId)">
+										</button>
+									</td>
+								</tr>
+							</ng-container>
+						</ng-container>
+					</ng-template>
+				</ng-template>
+			</ng-template>
+
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td class="text-center" style="text-align: center; vertical-align: middle;">
+					<strong [innerHTML]="'Final Price:'"></strong>
+				</td>
+				<td class="text-center" style="text-align: center; vertical-align: middle;">
+					<strong> <span>&euro;</span>
+						<span [innerHTML]="calculateGrandTotal(getAllCartItems()).toFixed(2)"></span>
+					</strong>
+				</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div class="text-center my-5">
+		<button class="btn btn-outline-success" (click)="redirectAllPizzas()">Continue Shopping</button>
+	</div>
+</div>

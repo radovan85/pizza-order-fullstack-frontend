@@ -1,0 +1,12 @@
+<app-navbar></app-navbar>
+<div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
+    <div class="row">
+        <ng-template [ngIf]="hasAuthorityAdmin()">
+            <h1>Admin Dashboard</h1>
+        </ng-template>
+
+        <ng-template [ngIf]="hasAuthorityUser()">
+            <h1>Customer Dashboard</h1>
+        </ng-template>
+    </div>
+</div>

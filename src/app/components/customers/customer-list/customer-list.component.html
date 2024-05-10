@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+<div class="container mt-5" style="font-family: Oswald, sans-serif; color: #12044F;margin-bottom: 100px;">
+    <div class="row mb-5">
+        <h1>All Registered Users</h1>
+    </div>
+    <table class="table table-striped table-bordered" id="listingTable">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center">First Name</th>
+                <th class="text-center">Last Name</th>
+                <th class="text-center">Email Address</th>
+                <th class="text-center">Enabled</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-tempCustomer [ngForOf]="getPaginatedCustomers()">
+                <tr>
+                    <td class="text-center" [innerHTML]="getUser(tempCustomer.userId).firstName"></td>
+                    <td class="text-center" [innerHTML]="getUser(tempCustomer.userId).lastName"></td>
+                    <td class="text-center" [innerHTML]="getUser(tempCustomer.userId).email"></td>
+                    <td class="text-center">
+                        <span *ngIf="getUser(tempCustomer.userId).enabled === 0" class="text-danger">Suspended</span>
+                        <span *ngIf="getUser(tempCustomer.userId).enabled === 1">Active</span>
+                    </td>
+                    <td class="text-center">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-success dropdown-toggle"
+                                data-toggle="dropdown">Actions</button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item"
+                                    (click)="redirectCustomerDetails(tempCustomer.customerId)">Details</a>
+                                <div class="dropdown-divider"></div>
+                                <a *ngIf="getUser(tempCustomer.userId).enabled === 1" class="dropdown-item text-danger"
+                                    (click)="suspendUser(tempCustomer.userId)">Suspend</a>
+                                <a *ngIf="getUser(tempCustomer.userId).enabled === 0" class="dropdown-item text-success"
+                                    (click)="reactivateUser(tempCustomer.userId)">Reactivate</a>
+                                <a class="dropdown-item text-dark" style="background-color: #ED1427;"
+                                    (click)="deleteCustomer(tempCustomer.customerId)">Remove</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+    <div class="pagination" *ngIf="getCustomerList().length > 0">
+        <button (click)="prevPage()" [disabled]="getCurrentPage() == 1">Previous</button>
+        <span>Page {{ getCurrentPage() }} / {{ getTotalPages() }}</span>
+        <button (click)="nextPage()" [disabled]="getCurrentPage() == getTotalPages()">Next</button>
+    </div>
+</div>

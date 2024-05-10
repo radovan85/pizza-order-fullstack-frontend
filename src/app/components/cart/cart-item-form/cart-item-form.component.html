@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="container mt-5" style="font-family: 'Oswald', sans-serif; color: #12044F; margin-bottom: 100px;">
+	<div class="row justify-content-center">
+		<div class="col-lg-6 col-md-8 col-sm-10">
+			<div class="card">
+				<h1 class="text-center card-header">Add To Cart</h1>
+				<div class="card-body">
+					<form id="itemForm">
+						<div class="form-group">
+							<label>Pizza:</label>
+							<h5>{{ getPizza().name }}</h5>
+						</div>
+
+						<div class="form-group">
+							<label>Pizza Size:</label>
+							<select name="pizzaSizeId" id="pizzaSizeId" class="form-control">
+								<option value="">Please Select</option>
+								<ng-container *ngFor="let pizzaSize of getAllPizzaSizes()">
+									<option *ngIf="getPizza().pizzaId === pizzaSize.pizzaId"
+										[value]="pizzaSize.pizzaSizeId">
+										{{ pizzaSize.name }} - €{{ pizzaSize.price?.toFixed(2) }}
+									</option>
+								</ng-container>
+							</select>
+							<span class="text-danger" id="pizzaSizeIdError" style="visibility: hidden;">Please select
+								one of the options!</span>
+						</div>
+
+						<div class="form-group">
+							<label>Quantity:</label>
+							<input type="number" id="quantity" name="quantity" class="form-control"
+								placeholder="Enter quantity" min="1" max="20">
+							<span class="text-danger" id="quantityError" style="visibility: hidden;">Please provide
+								quantity min 1 max 20!</span>
+						</div>
+
+						<div class="text-center">
+							<button type="submit" class="btn btn-success">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

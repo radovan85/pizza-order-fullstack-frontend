@@ -1,0 +1,52 @@
+.container {
+    font-family: Oswald, sans-serif;
+    color: #12044F;
+    margin-bottom: 100px;
+}
+
+.table img {
+    width: 80px;
+    height: auto;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.dropdown-menu {
+    background-color: #82FF76;
+    color: #074912;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #C4C4CF;
+    color: #074912;
+}
+
+.text-danger {
+    color: #dc3545;
+}
+
+.text-danger:hover {
+    background-color: #EBC8C8;
+}
+
+.pagination .page-link {
+    color: #007bff;
+}
+
+.pagination .disabled .page-link {
+    color: #6c757d;
+}

@@ -1,0 +1,20 @@
+.container {
+    font-family: Oswald, sans-serif;
+    color: #12044F;
+    margin-bottom: 100px;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.text-danger {
+    color: #dc3545;
+}

@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+    <div class="page-header text-center mb-5">
+        <h1>Order</h1>
+        <p class="lead">Order, customer, and product list</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Receipt</h2>
+                </div>
+                <div class="card-body">
+                    <address>
+                        <strong>Delivery Address:</strong><br>
+                        <span>{{ getAddress().address }}</span><br>
+                        <span>{{ getAddress().city }}</span><br>
+                        <span>{{ getAddress().postcode }}</span>
+                    </address>
+
+                    <h4 class="text-center my-3">Order Time: {{ getOrder().createTime }}</h4>
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Pizza</th>
+                                <th>#</th>
+                                <th>Size</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-template ngFor let-orderItem [ngForOf]="getOrderedItems()">
+                                <tr>
+                                    <td class="col-md-9"><em [innerHTML]="orderItem.pizza"></em></td>
+                                    <td class="col-md-1" style="text-align: center" [innerHTML]="orderItem.quantity">
+                                    </td>
+                                    <td class="col-md-1" style="text-align: center" [innerHTML]="orderItem.pizzaSize">
+                                    </td>
+                                    <td class="col-md-1" style="text-align: center"
+                                        [innerHTML]="'€' + orderItem.pizzaPrice?.toFixed(2)">
+                                    </td>
+                                    <td class="col-md-1" style="text-align: center"
+                                        [innerHTML]="'€' + orderItem.price?.toFixed(2)">
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-right">
+                    <h4>Grand Total: <span class="text-danger">{{ getOrder().orderPrice?.toFixed(2) }}€</span></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <button class="btn btn-outline-success mr-3" (click)="redirectAllOrders()">Back</button>
+        <button class="btn btn-outline-danger" (click)="deleteOrder(getOrder().orderId)">Delete</button>
+    </div>
+</div>

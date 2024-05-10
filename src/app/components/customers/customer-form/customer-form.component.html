@@ -1,0 +1,99 @@
+<!-- Registration Component -->
+<app-navbar></app-navbar>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Registration</h2>
+                </div>
+                <div class="card-body">
+                    <form id="registrationForm">
+                        <!-- First Name Field -->
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input id="firstName" name="firstName" type="text" class="form-control"
+                                placeholder="Enter First Name">
+                            <span class="text-danger" id="firstNameError" style="visibility: hidden;">Not Empty! Max 30
+                                letters allowed!</span>
+                        </div>
+                        <!-- Last Name Field -->
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input id="lastName" name="lastName" type="text" class="form-control"
+                                placeholder="Enter Last Name">
+                            <span class="text-danger" id="lastNameError" style="visibility: hidden;">Not Empty! Max 30
+                                letters allowed!</span>
+                        </div>
+                        <!-- Email Address Field -->
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input id="email" name="email" type="text" class="form-control"
+                                placeholder="Enter Email Address">
+                            <span class="text-danger" id="emailError" style="visibility: hidden;">Please provide valid
+                                email! Max 50 letters
+                                allowed!</span>
+                        </div>
+                        <!-- Password Field -->
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input id="password" name="password" type="password" class="form-control"
+                                placeholder="Enter Password">
+                            <span class="text-danger" id="passwordError" style="visibility: hidden;">Minimum 6 and
+                                maximum 30 letters!</span>
+                        </div>
+                        <!-- Confirm Password Field -->
+                        <div class="form-group">
+                            <label for="confirmpass">Confirm Password</label>
+                            <input id="confirmpass" name="confirmpass" type="password" class="form-control"
+                                placeholder="Confirm Password">
+                        </div>
+                        <!-- Address Field -->
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input id="address" name="address" type="text" class="form-control"
+                                placeholder="Enter Address">
+                            <span class="text-danger" id="addressError" style="visibility: hidden;">Not Empty! Max 75
+                                letters allowed!</span>
+                        </div>
+                        <!-- City Field -->
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input id="city" name="city" type="text" class="form-control" placeholder="Enter City">
+                            <span class="text-danger" id="cityError" style="visibility: hidden;">Not Empty! Max 40
+                                letters allowed!</span>
+                        </div>
+                        <!-- Post Code Field -->
+                        <div class="form-group">
+                            <label for="postcode">Post Code</label>
+                            <input id="postcode" name="postcode" type="text" class="form-control"
+                                placeholder="Enter Post Code">
+                            <span class="text-danger" id="postcodeError" style="visibility: hidden;">Min 5 and Max 10
+                                letters allowed!</span>
+                        </div>
+                        <!-- Phone Field -->
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input id="phone" name="phone" type="text" class="form-control"
+                                placeholder="Enter Phone Number" (keypress)="validateNumber($event)">
+                            <span class="text-danger" id="phoneError" style="visibility: hidden;">Min 9 max 15 numbers
+                                allowed!</span>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success w-100">Register</button>
+                        </div>
+                        <!-- Login Redirect -->
+                        <div class="text-center mt-3">
+                            <span>Already have an account? </span>
+                            <a class="text-primary" (click)="redirectLogin()">Login here</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-muted text-center">
+                    <span id="alertMessage" class="text-danger">Please fill out all fields correctly.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
